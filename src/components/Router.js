@@ -8,18 +8,29 @@ import Navigation from "./Navigation";
 
 const AppRouter = ({ refreshUser, isLoggedIn, userObj }) => {
     return (
-        <Router>
+        <Router basename={process.env.PUBLIC_URL}>
             {isLoggedIn && <Navigation userObj={userObj} />}
             <Switch>
                 {isLoggedIn ? (
                     <>
-                        <Route exact path="/">
-                            <Home userObj={userObj} />
-                        </Route>
-                        <Route path="/profile">
-                            <Profile userObj={userObj} refreshUser={refreshUser} />
-                        </Route>
-                        <Redirect from="*" to="/" />
+                        <div
+                            style={{
+                            maxWidth: 890,
+                            width: "100%",
+                            margin: "0 auto",
+                            marginTop: 80,
+                            display: "flex",
+                            justifyContent: "center",
+                            }}
+                        >
+                            <Route exact path="/">
+                                <Home userObj={userObj} />
+                            </Route>
+                            <Route path="/profile">
+                                <Profile userObj={userObj} refreshUser={refreshUser} />
+                            </Route>
+                            <Redirect from="*" to="/" />
+                        </div>
                     </>
                 ) : (
                     <>
@@ -35,9 +46,9 @@ const AppRouter = ({ refreshUser, isLoggedIn, userObj }) => {
 }
 
 AppRouter.propTypes = {
-    refreshUser: PropTypes.func.isRequired,
-    isLoggedIn: PropTypes.bool.isRequired,
-    userObj: PropTypes.object.isRequired
+    refreshUser: PropTypes.func,
+    isLoggedIn: PropTypes.bool,
+    userObj: PropTypes.object
 }
 
 export default AppRouter;
