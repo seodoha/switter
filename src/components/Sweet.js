@@ -2,6 +2,7 @@ import { dbService, storageService } from 'fbase';
 import React, { useState } from "react";
 import { doc, deleteDoc, updateDoc } from"firebase/firestore";
 import { deleteObject, ref } from "firebase/storage";
+import PropTypes from "prop-types";
 
 const Sweet = ({ sweetObj, isOwner }) => {
     const [editing, setEditing] = useState(false);
@@ -67,5 +68,10 @@ const Sweet = ({ sweetObj, isOwner }) => {
         </div>
     )
 };
+
+Sweet.propTypes = {
+    sweetObj: PropTypes.object.isRequired,
+    isOwner: PropTypes.bool.isRequired,
+}
 
 export default Sweet;
